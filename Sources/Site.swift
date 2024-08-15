@@ -7,7 +7,7 @@ struct IgniteWebsite {
         let site = ExampleSite()
 
         do {
-            try await site.publish()
+            try await site.publish(buildDirectoryPath: "docs")
         } catch {
             print(error.localizedDescription)
         }
