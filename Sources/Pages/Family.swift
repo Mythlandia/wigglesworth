@@ -1,18 +1,17 @@
 //
-//  SwiftUIView.swift
+//  Family.swift
 //  IgniteStarter
 //
 //  Created by Phil Wigglesworth on 8/15/24.
 //
 
-import SwiftUI
+import Foundation
+import Ignite
 
-struct SwiftUIView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+struct Family: StaticPage {
+    var title: String = "Family"
+    
+    func body(context: PublishingContext) -> [BlockElement] {
+        Text("Family rules..")
     }
-}
-
-#Preview {
-    SwiftUIView()
 }

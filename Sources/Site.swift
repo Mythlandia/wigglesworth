@@ -14,16 +14,22 @@ struct IgniteWebsite {
     }
 }
 
-struct ExampleSite: Site {    
-    var name = "Hello World, Phil"
+struct ExampleSite: Site {
+    var name = "Phil Wigglesworth"
     var titleSuffix = " - wigglesworth.us"
     var url:URL = URL("https://wigglesworth.us")
     var builtInIconsEnabled = true
-
+    
     var author = "Phil Wigglesworth"
-
+    
     var homePage = Home()
     var theme = MyTheme()
+    
+    var pages: [any StaticPage] = [
+        Home(),
+        Family(),
+        Background()
+    ]
 }
 
 

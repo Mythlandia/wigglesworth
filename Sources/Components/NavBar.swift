@@ -12,22 +12,23 @@ import Ignite
 /// An example navigation bar, demonstrating how to create reusable components.
 struct NavBar: Component {
     func body(context: PublishingContext) -> [any PageElement] {
+        
         NavigationBar(
-            logo: Text("The Villages Primer")
+            logo: Text("Phil Wigglesworth")
                 .font(.title1)
-                .foregroundStyle(Color.darkGreen)
+                .foregroundStyle(Color.darkBlue)
                 .padding()
         ) {
-            Dropdown("Key concepts") {
-                Link("Villages", target: Villages() )
-                Link("Locations", target: Locations() )
+            Dropdown("Quick Links") {
+                Link("Family", target: Family() )
+                Link("Background", target: Background() )
             }
         }
         .navigationItemAlignment(.trailing)
-        .background(Color.lightGreen)
+        .background(Color.lightBlue)
         .position(.fixedTop)
         .navigationItemAlignment(.trailing)
         
-        Spacer(size: 50)
+        Spacer(size: 100)
     }
 }
