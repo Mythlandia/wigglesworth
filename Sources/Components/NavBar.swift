@@ -22,6 +22,7 @@ struct NavBar: Component {
             Dropdown("Quick Links") {
                 Link("Family", target: Family() )
                 Link("Background", target: Background() )
+                Link("Photo", target: Photos() )
             }
         }
         .navigationItemAlignment(.trailing)
