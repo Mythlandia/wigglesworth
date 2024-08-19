@@ -10,13 +10,26 @@ import Ignite
 
 struct Photos: StaticPage {
     var title: String = "Photos"
-    var images: [ImageInfo] = []
+    var photos: [Photo] = []
     
     func body(context: PublishingContext) -> [BlockElement] {
-        for image in images {
+        for photo in photos {
             Text{
-                Link(image.name, target: Photo(imageInfo: image) )
+                Link(photo.imageInfo.name, target: photo )
             }
         }
     }
 }
+
+//struct Photos: StaticPage {
+//    var title: String = "Photos"
+//    var images: [ImageInfo] = []
+//    
+//    func body(context: PublishingContext) -> [BlockElement] {
+//        for image in images {
+//            Text{
+//                Link(image.name, target: Photo(imageInfo: image) )
+//            }
+//        }
+//    }
+//}

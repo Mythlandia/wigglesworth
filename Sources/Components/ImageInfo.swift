@@ -8,18 +8,57 @@
 import Foundation
 import SwiftUI
 
+private let fitWidth: Double = 800
+private let fitHeight: Double = 600
+private let viewAspectRatio:Double = fitWidth / fitHeight
+
 struct ImageInfo {
-    
-    static let sugggestedWidth: Int = 400
-    static let suggestedHeight: Int = 400
     
     var name: String
     var path: String
     var width: Int
     var height: Int
     var webPath: String { "/images/\(name)" }
-    var suggestedWidth: Int { if width > height { ImageInfo.sugggestedWidth } else { (ImageInfo.sugggestedWidth * width) / height } }
-    var suggestedHeight: Int { if width > height { ImageInfo.suggestedHeight } else { (ImageInfo.suggestedHeight * height) / width } }
+    private var imageAspectRatio: Double { Double(width) / Double(height) }
+    var suggestedWidth: Int {
+        if imageAspectRatio <= viewAspectRatio {
+            Int( fitHeight * imageAspectRatio )
+        } else {
+            Int( fitWidth)
+        }
+    }
+    var suggestedHeight: Int {
+        if imageAspectRatio <= viewAspectRatio {
+            Int( fitHeight)
+        } else {
+            Int( fitWidth / imageAspectRatio )
+        }
+    }
+    
+//        let imageAspectRatio = image.size.width / image.size.height
+//        let viewAspectRatio = imageView.frame.width / imageView.frame.height
+//        
+//        var fitWidth:  CGFloat   // scaled width in points
+//        var fitHeight: CGFloat   // scaled height in points
+//        var offsetX:   CGFloat   // horizontal gap between image and frame
+//        var offsetY:   CGFloat   // vertical gap between image and frame
+//        
+//        if imageAspectRatio <= viewAspectRatio {
+//            // Image is narrower than view so with aspectFit, it will touch
+//            // the top and bottom of the view, but not the sides
+//            fitHeight = imageView.frame.height
+//            fitWidth = fitHeight * imageAspectRatio
+//            offsetY = 0
+//            offsetX = (imageView.frame.width - fitWidth) / 2
+//        } else {
+//            // Image is wider than view so with aspectFit, it will touch
+//            // the sides of the view but not the top and bottom
+//            fitWidth = imageView.frame.width
+//            fitHeight = fitWidth / imageAspectRatio
+//            offsetX = 0
+//            offsetY = (imageView.frame.height - fitHeight) / 2
+//        }
+    
     
     init(path: String, name: String) {
         self.name = name

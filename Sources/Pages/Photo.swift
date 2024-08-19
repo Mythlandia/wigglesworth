@@ -12,19 +12,43 @@ struct Photo: StaticPage {
     var title: String { imageInfo.name.replacingOccurrences(of: "/", with: "-") }
     var imageInfo: ImageInfo
     var path: String { "/photo/\(title)" }
+    var next: (any StaticPage)?
+    var previous: (any StaticPage)?
     
-    init(imageInfo: ImageInfo) {
+    init(imageInfo: ImageInfo, previous: (any StaticPage)? = nil) {
         self.imageInfo = imageInfo
-        print("Creating photo page for \(title)")
+        self.previous = previous
     }
     
+    
     func body(context: PublishingContext) -> [BlockElement] {
-        Card {
-            Text(title)
+        Text(title)
+        Section {
+            if let previous {
+                Text{
+                    Link("Previous", target: previous)
+                        .linkStyle(.button)
+                }
+            } else {
+                Text("")
+            }
+
+            if let next {
+                Text{
+                    Link("Next", target: next)
+                        .linkStyle(.button)
+                }
+                .horizontalAlignment(.trailing)
+                
+            }
+        }
+        Section {
             Image(decorative: imageInfo.webPath)
                 .resizable()
                 .frame(width: imageInfo.suggestedWidth, height: imageInfo.suggestedHeight)
-            Text(imageInfo.name)
         }
+        .horizontalAlignment(.center)
+
+        Text(imageInfo.name)
     }
 }

@@ -3,7 +3,7 @@ import Ignite
 
 struct Home: StaticPage {
     var title = "Welcome"
-    let imageName: String = "/images/Phil Wigglesworth.jpg"
+    let imageName: String = "/images/Phil Wigglesworth.jpeg"
     
     func body(context: PublishingContext) -> [BlockElement] {
         Section {

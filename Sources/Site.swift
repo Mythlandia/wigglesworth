@@ -27,15 +27,40 @@ struct ExampleSite: Site {
     
     var images: [ImageInfo] = ExampleSite.loadImageInfo()
     
+    var photoPages: [Photo] {
+        // Creates a linked list of Photo() pages from images
+        var pages: [Photo] = []
+        var previous: Photo?
+        for image in images {
+            // already know the previous Photo(), if any, so create with that preset
+            let photo = Photo(imageInfo: image, previous: previous)
+            // only just know what the next photo for the previous photo will be (this one), so update it
+            previous?.next = photo
+            // the first time through the loop there will be no previous photo to save
+            if let previous {
+                // only append once updated with both previous and next values
+                pages.append( previous )
+            }
+            // get ready for the next iteration
+            previous = photo
+        }
+        // there will be one Photo() that has yet to be saved at the end of the loop
+        if let previous {
+            // save the final Photo()
+            pages.append( previous )
+        }
+        return pages
+    }
+
     var pages: [any StaticPage] {
         Home()
         Family()
         Background()
-        Photos(images: images)
-        for image in images {
-            Photo(imageInfo: image)
+        Photos(photos: photoPages)
+        
+        for page in photoPages {
+            page
         }
-//        Photo(imageInfo: images[1])
     }
     
     static func loadImageInfo() -> [ImageInfo] {
