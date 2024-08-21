@@ -17,7 +17,7 @@ struct IgniteWebsite {
 struct ExampleSite: Site {
     var name = "Phil Wigglesworth"
     var titleSuffix = " - wigglesworth.us"
-    var url:URL = URL("https://wigglesworth.us")
+    var url: URL = URL("https://wigglesworth.us")
     var builtInIconsEnabled = true
     
     var author = "Phil Wigglesworth"
@@ -76,29 +76,13 @@ struct ExampleSite: Site {
         
         var images: [ImageInfo] = []
         
-//        do {
-//            let fileManager = FileManager.default
-//            let contents = try fileManager.contentsOfDirectory(atPath: subPath)
-//            for file in contents {
-//                if file.hasSuffix(".jpeg") {
-//                    images.append(ImageInfo(path: subPath, name: file))
-//                }
-//            }
-//        } catch {
-//            print("Error: \(error.localizedDescription)")
-//        }
-        
-//        print()
-//        print("Deep dive files from \(subPath)")
-//        print()
         let docsDir = subPath
         let localFileManager = FileManager.default
         
         let dirEnum = localFileManager.enumerator(atPath: docsDir)
         
         while let file = dirEnum?.nextObject() as? String {
-            if file.hasSuffix(".jpeg") {
-//                print(docsDir.appending("/\(file)"))
+            if file.hasSuffix(".jpeg") || file.hasSuffix(".mp4") {
                 images.append(ImageInfo(path: docsDir, name: file))
             }
         }
