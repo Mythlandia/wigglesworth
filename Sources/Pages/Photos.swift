@@ -67,14 +67,19 @@ struct Photos: StaticPage {
             let split = splitVar
             
             if split.count > 1 {
-                Group {
+                Section {
                     for button in buttons {
                         Text {
                             Link(button.title, target: button.destination)
                                 .linkStyle(.button)
                                 .buttonSize(.small)
                         }
-//                        .horizontalAlignment(.center)
+                        .horizontalAlignment(.leading)
+                    }
+                    if buttons.count < 8 {
+                        for _ in buttons.count ..< 8 {
+                            Text("")
+                        }
                     }
                 }
 
@@ -106,7 +111,7 @@ struct Photos: StaticPage {
                         .linkStyle(.button)
                         .buttonSize(.small)
                 }
-//                .horizontalAlignment(.center)
+                .horizontalAlignment(.leading)
             }
         }
     }
